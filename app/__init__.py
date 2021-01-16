@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 
-
-# Globally accessible libraries
-db = SQLAlchemy()
 
 
 def create_app():
@@ -13,14 +10,20 @@ def create_app():
     app.config.from_object('config.Config')
 
     # Initialize Plugins
-    db.init_app(app)
+    # db.init_app(app)
 
     with app.app_context():
         # Include our Routes
         from . import routes
 
-        # Register Blueprints
-        # app.register_blueprint(auth.auth_bp)
-        # app.register_blueprint(admin.admin_bp)
+        from . import db
+        db.init_app(app)
+
+        from . import auth
+        app.register_blueprint(auth.bp)
+
+        from . import blog
+        app.register_blueprint(blog.bp)
+        app.add_url_rule('/', endpoint='index')
 
         return app
