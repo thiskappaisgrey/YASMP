@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block event %}New Event{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="event">event</label>
+    <input name="event" id="event" value="{{ request.form['event'] }}" required>
+    <label for="time">time</label>
+    <input name="time" id="time">{{ request.form['time'] }}</textarea>
+    <label for="location">location</label>
+    <input name="location" id="location">{{ request.form['location'] }}</textarea>
+	
+    <label for="description">description</label>
+    <textarea name="description" id="description">{{ request.form['description'] }}</textarea>
+
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
