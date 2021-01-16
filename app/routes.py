@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
-from flask import Flask
+from flask import current_app as app
 from markupsafe import escape
 
-app = Flask(__name__)
 
 @app.route("/")
 def hello():
@@ -11,11 +10,11 @@ def hello():
 
 # TODO Create CRUD for this
 @app.route("/users/<username>")
-def users():
+def users(username):
     return "User %s" % escape(username)
 # TODO Create CRUD for this
 @app.route("/events/<eventname>")
-def events()
+def event(eventname):
     return "Event %s" % escape(eventname)
 
 if __name__ == "__main__":
