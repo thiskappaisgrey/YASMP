@@ -38,7 +38,7 @@ def create():
             db.execute(
                 'INSERT INTO post (event, description, time, location, author_id, regs_id)'
                 ' VALUES (?, ?, ?, ?, ?, ?)',
-                (event, description, time, location, g.user['id'], "0,0,0,0,0")
+                (event, description, time, location, g.user['id'], "")
             )
             db.commit()
             return redirect(url_for('events.index'))
@@ -47,7 +47,7 @@ def create():
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, event, description, time, location, created, author_id, username'
+        'SELECT p.id, event, description, time, location, created, author_id, username, regs_id'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -84,7 +84,7 @@ def update(id):
             db.execute(
                 'UPDATE post SET event = ?, description = ?, time = ?, location = ?'
                 ' WHERE id = ?',
-                (event, description, time, location, id)
+                (event, description, time, location, id,)
             )
             db.commit()
             return redirect(url_for('events.index'))
@@ -106,10 +106,10 @@ def display_events(id):
     post = get_post(id)
     return render_template('events/event.html', post=post)
 
+
 @bp.route('/<int:id>/register', methods=('POST', ))
 def register(id):
     post = get_post(id)
-    print(post)
     if request.method == 'POST':
         reg_id = g.user['id']
 
@@ -117,26 +117,30 @@ def register(id):
 
         if error is not None:
             flash(error)
+            return render_template('events/event.html', post=post)
         else:
             db = get_db()
             ids = post['regs_id'].split(",")
-            counter = 0
-            for i in ids:
-                if i == reg_id:
-                    flash("Already Registered!")
-                    break
-                if i == 0:
-                    ids[i] = reg_id
-                else:
-                    counter += 1
-                    if counter == 5:
-                        flash("No more space!")
-                        break
+            if len(post['regs_id']) == 0:
+                ids_string = reg_id
+                flash(ids_string)
+            elif len(ids) > 5:
+                flash("No more space!")
+                return render_template('events/event.html', post=post)
 
-            ids = ",".join(ids)
+            else:
+                for i in ids:
+                        if str(i) == str(reg_id):
+                                flash("Already registered!")
+                                return render_template('events/event.html', post=post)               
+                ids.append(reg_id)
+                ids_string = ",".join(str(x) for x in ids)
+                flash(ids_string)
             db.execute(
-                'UPDATE post SET regs_id = ?',
-                ids
+                'UPDATE post SET regs_id = ?'
+                ' WHERE id = ?',
+                (ids_string,id,)
             )
             db.commit()
             flash("Registered!")
+    return render_template('events/event.html', post=post)
