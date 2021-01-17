@@ -2,9 +2,9 @@
 
 {% block header %}
 <div class="p-4" >
-    <h1 class="text-3xl text-extrabold">{% block title %}Yet Another Social Media Platform{% endblock %}</h1>
-    <h2 class="text-5xl text-bold">Yet another platform to connect to people, but in real life.</h2>
-    <p class="w-1/2 pl-2 pt-4">
+    <h1 class="text-3xl font-extrabold">{% block title %}Yet Another Social Media Platform{% endblock %}</h1>
+    <h2 class="text-5xl font-bold">Simple, Local, Casual.</h2>
+    <p class="w-3/4 pl-2 pt-4">
         Are you tired of the major social media platforms? Tired of arguing with random
         people on the internet? Tired of always feeling empty inside, without
         anyone to hang out with in real life? Been stuck too long, in the great
@@ -15,9 +15,6 @@
 {% endblock %}
 
 {% block content %}
-    {% if g.user %}
-        <h2>{{ g.user['username'] }}</h2>
-    {% else %}
     <div class="p-4 bg-yellow-200">
         <h2 class="text-3xl text-center pb-4">Get Started</h2>
         <ul class="flex flex-col items-center pb-2">
@@ -32,5 +29,4 @@
             <li> Meet people. Have fun. ALL IN REAL LIFE.</li>
         </ol>
     </div>
-{% endif %}
 {% endblock %}

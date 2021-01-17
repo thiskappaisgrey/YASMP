@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import ( Flask, render_template )
+from flask import ( Flask, render_template, flash, g )
 # from flask_sqlalchemy import SQLAlchemy
 
 
@@ -15,7 +15,17 @@ def create_app():
     with app.app_context():
         @app.route('/')
         def index():
-            return render_template("index.html")
+            if g.user is None:
+                return render_template("index.html")
+            if g.user["events_id"] is None or len(g.user["events_id"]) == 0:
+                return render_template("user-homepage.html", posts=[])
+            from .events import ( get_post )
+            events_ids = g.user["events_id"].split(",")
+            events = []
+            for e in events_ids:
+                events.append(get_post(int(e)))
+
+            return render_template("user-homepage.html", posts=events)
 
         from . import db
         db.init_app(app)

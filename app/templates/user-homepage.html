@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1 class="text-5xl font-bold">{% block title %}All Events{% endblock %}</h1>
-  {% if g.user %}
-    <a class="hover:bg-green-400 bg-green-200 border border-gray-300 rounded-md  text-l font-bold block w-full text-center p-2 mt-4"  href="{{ url_for('events.create') }}">+ Create New Event</a>
-  {% endif %}
+<h1 class="text-5xl font-bold">Events You've registered for:</h1>
 {% endblock %}
 
+
 {% block content %}
-  {% for post in posts %}
-    <article class="p-4 m-4 rounded-md bg-yellow-400">
+{% for post in posts %}
+    <article class="p-4 m-4 rounded-md bg-yellow-400" >
       <header class="flex justify-between ">
         <div>
           <h1 class="text-2xl font-bold text-indigo-600 hover:text-indigo-400"><a href="{{ url_for('events.index') + '/' + post['id'] | string }}">{{ post['event'] }}</a></h1>
@@ -23,5 +21,12 @@
       <p class="body"><b>Location: </b>{{ post['location'] }}</p>
       <p class="body"><b>Description: </b>{{ post['description'] }}</p>
     </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
   {% endfor %}
-{% endblock %}
+      <div class="flex flex-col items-center">
+          <h2 class="text-4xl font-bold text-center mb-4">Looking for Events?</h2>
+          <a class="hover:bg-yellow-300 border border-gray-300 rounded-md object-center text-2xl text-center p-4 mt-4" href="{{ url_for('events.index') }}"> Click here to find more events! </a>
+      </div>
+      {% endblock %}

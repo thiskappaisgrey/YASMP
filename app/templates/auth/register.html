@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <p class="text-center">Join Yasmp</p>
-  <h1 class="text-center text-4xl font-extrabold">{% block title %}Create Your Account{% endblock %}</h1>
+  <p class="text-center mb-2">Join Yasmp</p>
+  <h1 class="text-center text-4xl font-extrabold mb-4">{% block title %}Create Your Account{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <form class="rounded flex flex-col px-4 py-8 bg-yellow-300 justify-center max-w-lg mx-auto" method="post">
-    <div class="flex justify-between py-2">
-        <div class="flex flex-col w-1/2 pr-4">
-            <label class="rounded" for="firstname">First Name</label>
-            <input class="rounded"  name="firstname" id="firstname" required>
-        </div>
-        <div class="flex flex-col w-1/2 pl-4">
-            <label  for="lastname">Last Name</label>
-            <input name="lastname" id="lastname" required>
-        </div>
-    </div>
-    <label class="pt-2" for="username">Username</label>
+  <form class="rounded flex flex-col p-4 bg-yellow-300 justify-center max-w-lg mx-auto" method="post">
+      <!-- <div class="flex justify-between py-2">
+           <div class="flex flex-col w-1/2 pr-4">
+           <label class="rounded" for="firstname">First Name</label>
+           <input class="rounded"  name="firstname" id="firstname" required>
+           </div>
+           <div class="flex flex-col w-1/2 pl-4">
+           <label  for="lastname">Last Name</label>
+           <input name="lastname" id="lastname" required>
+           </div>
+           </div> -->
+    <label class="" for="username">Username</label>
     <input class="rounded" name="username" id="username" required>
-    <label class="pt-2" for="email">email</label>
-    <input name="email" id="email" required>
+    <!-- <label class="pt-2" for="email">email</label>
+         <input name="email" id="email" required> -->
     <label class="pt-2" for="password">Password</label>
     <input class="rounded" type="password" name="password" id="password" required>
-    <input class="self-center w-1/4 p-2 flex items-center justify-center rounded-md bg-gradient-to-r from-red-500 to-blue-500 hover:from-red-700 hover:to-blue-700 text-white mt-8" type="submit" value="Register">
+    <input class="self-center w-1/4 p-2 flex items-center justify-center rounded-md bg-gradient-to-r from-red-500 to-blue-500 hover:from-red-700 hover:to-blue-700 text-white mt-4" type="submit" value="Register">
   </form>
 {% endblock %}
