@@ -99,3 +99,9 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('events.index'))
+
+@bp.route('/<int:id>', methods=('GET', 'POST'))
+@login_required
+def display_events(id):
+    post = get_post(id)
+    return render_template('events/event.html', post=post)
