@@ -13,9 +13,6 @@ def create_app():
     # db.init_app(app)
 
     with app.app_context():
-        # Include our Routes
-        from . import routes
-
         from . import db
         db.init_app(app)
 
