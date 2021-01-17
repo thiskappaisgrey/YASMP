@@ -141,6 +141,16 @@ def register(id):
                 ' WHERE id = ?',
                 (ids_string,id,)
             )
+            post_id = post["id"]
+            if post_id == None:
+                event_ids = str(post_id)
+            else:
+                event_ids = "," + str(g.user['events_id']) + str(post_id)
+            db.execute(
+                'UPDATE user SET events_id = ?'
+                ' WHERE id = ?',
+                (event_ids, id)
+            )
             db.commit()
             flash("Registered!")
     return render_template('events/event.html', post=post)
