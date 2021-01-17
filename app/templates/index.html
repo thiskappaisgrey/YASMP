@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Home Page{% endblock %}</h1>
+
+{% endblock %}
+
+{% block content %}
+    {% if g.user %}
+    <h1>{{ g.user['username'] }}</h1>
+    {% else %}
+    <h1>Not logged in</h1>
+    {% endif %}
+{% endblock %}

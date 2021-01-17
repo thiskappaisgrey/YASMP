@@ -1,0 +1,11 @@
+#+TITLE: Todo list
+
+* Proj Refactor the page templates
+* Proj Events page
+- [ ] OPTIONAL: Make an individual page for events
+- [ ] Add ability for users to register for events
+- [ ] Create a page for users to see which events they are registered for
+- [ ] Create a page for each individual events to see who are registered for each event
+* Proj User profile
+- [ ] Add a profile page for users
+- [ ] Allow users to edit their profile
