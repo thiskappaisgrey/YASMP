@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+
+.h1 {
+    @apply text-4xl font-extrabold;
+}
+.h2 {
+    @apply text-2xl font-extrabold;
+}
+
+@tailwind utilities;

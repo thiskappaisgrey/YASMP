@@ -1,9 +1,9 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} - YASMP </title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>YASMP - Yet Another Social Media Platform</h1>
-  <ul>
+<link rel="stylesheet" href="{{ url_for('static', filename='tailwind.css') }}">
+<nav class="flex justify-between px-2 bg-yellow-200">
+  <h1 class="text-4xl text-extrabold"><a href="{{ url_for('index') }}">YASMP</a></h1>
+  <ul class="flex space-x-4">
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
@@ -13,7 +13,7 @@
     {% endif %}
   </ul>
 </nav>
-<section class="content">
+<section class="p-2 bg-yellow-200 min-h-screen">
   <header>
     {% block header %}{% endblock %}
   </header>

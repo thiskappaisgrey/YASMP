@@ -1,14 +1,36 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Home Page{% endblock %}</h1>
+<div class="p-4" >
+    <h1 class="text-3xl text-extrabold">{% block title %}Yet Another Social Media Platform{% endblock %}</h1>
+    <h2 class="text-5xl text-bold">Yet another platform to connect to people, but in real life.</h2>
+    <p class="w-1/2 pl-2 pt-4">
+        Are you tired of the major social media platforms? Tired of arguing with random
+        people on the internet? Tired of always feeling empty inside, without
+        anyone to hang out with in real life? Been stuck too long, in the great
+        indoors? Well our platform sure does have a solution for you!
+    </p>
+</div>
 
 {% endblock %}
 
 {% block content %}
     {% if g.user %}
-    <h1>{{ g.user['username'] }}</h1>
-    {% else %}
-    <h1>Not logged in</h1>
-    {% endif %}
+        <h2>{{ g.user['username'] }}</h2>
+        {% else %}
+    <div class="p-4 bg-yellow-200">
+        <h2 class="text-3xl text-center pb-4">Get Started</h2>
+        <ul class="flex flex-col items-center pb-2">
+        <li class="w-1/4 p-2 flex items-center justify-center rounded-md bg-gradient-to-r from-red-500 to-blue-500 hover:from-red-700 hover:to-blue-700 text-white"><a class="w-full text-center h-full" href="{{ url_for('auth.register') }}">Register</a></li>
+        <li><a class="" href="{{ url_for('auth.login') }}">Already have an account? Login</a></li>
+        </ul>
+        <h1 class="text-3xl text-extrabold">How It works</h1>
+        <ol class="list-inside list-decimal">
+            <li> Create an Account. </li>
+            <li> Create an event(i.e. "Basketball at the court")</li>
+            <li> Don't have an event in mind? Don't worry, just sign up for one created by other users!</li>
+            <li> Meet people. Have fun. ALL IN REAL LIFE.</li>
+        </ol>
+    </div>
+{% endif %}
 {% endblock %}

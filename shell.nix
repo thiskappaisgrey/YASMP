@@ -13,5 +13,7 @@ pkgs.mkShell {
     pkgs.python3
     pkgs.poetry
     pkgs.sqlite
+    # For Tailwindcss
+    pkgs.nodejs
   ];
 }
