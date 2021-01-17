@@ -15,5 +15,6 @@ CREATE TABLE post (
   description TEXT NOT NULL,
   time TEXT NOT NULL,
   location TEXT NOT NULL,
+  regs_id TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
