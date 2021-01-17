@@ -36,9 +36,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (event, description, time, location, author_id)'
-                ' VALUES (?, ?, ?, ?, ?)',
-                (event, description, time, location, g.user['id'])
+                'INSERT INTO post (event, description, time, location, author_id, regs_id)'
+                ' VALUES (?, ?, ?, ?, ?, ?)',
+                (event, description, time, location, g.user['id'], "0,0,0,0,0")
             )
             db.commit()
             return redirect(url_for('events.index'))
@@ -105,3 +105,38 @@ def delete(id):
 def display_events(id):
     post = get_post(id)
     return render_template('events/event.html', post=post)
+
+@bp.route('/<int:id>/register', methods=('POST', ))
+def register(id):
+    post = get_post(id)
+    print(post)
+    if request.method == 'POST':
+        reg_id = g.user['id']
+
+        error = None
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            ids = post['regs_id'].split(",")
+            counter = 0
+            for i in ids:
+                if i == reg_id:
+                    flash("Already Registered!")
+                    break
+                if i == 0:
+                    ids[i] = reg_id
+                else:
+                    counter += 1
+                    if counter == 5:
+                        flash("No more space!")
+                        break
+
+            ids = ",".join(ids)
+            db.execute(
+                'UPDATE post SET regs_id = ?',
+                ids
+            )
+            db.commit()
+            flash("Registered!")

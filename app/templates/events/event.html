@@ -19,6 +19,11 @@
       <p class="body"><b>Location: </b>{{ post['location'] }}</p>
       <p class="body"><b>Description: </b>{{ post['description'] }}</p>
       <!-- <p class="button" href="{{'events.register' }} ">Register</p> -->
-      <input type="submit" value="Register">
+
+      <!--<button type="" >Register</button>-->
+
+      <form action="{{ url_for('events.register', id=post['id']) }}" method="post">
+        <input class="danger" type="submit" value="Register">
+      </form>
     </article>
 {% endblock %}
